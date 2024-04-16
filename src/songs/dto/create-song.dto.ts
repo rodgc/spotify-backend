@@ -11,10 +11,10 @@ export class CreateSongDto {
   @IsNotEmpty()
   readonly title: string;
 
-  @IsString()
   @IsArray()
+  @IsString({ each: true })
   @IsNotEmpty()
-  readonly artist: string[];
+  readonly artists: string[];
 
   @IsDateString()
   @IsNotEmpty()

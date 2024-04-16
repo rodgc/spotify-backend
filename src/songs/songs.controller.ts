@@ -1,20 +1,40 @@
-import { Controller, Delete, Get, Post, Put } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  HttpStatus,
+  Param,
+  ParseIntPipe,
+  Post,
+  Put,
+} from '@nestjs/common';
+import { SongsService } from './songs.service';
+import { CreateSongDto } from './dto/create-song.dto';
 
 @Controller('songs')
 export class SongsController {
+  constructor(private songsService: SongsService) {}
+
   @Post()
-  crate() {
-    return 'create a new song';
+  crate(@Body() createSong: CreateSongDto) {
+    return this.songsService.create(createSong);
   }
 
   @Get()
   findAll() {
-    return 'Find All Songs';
+    return this.songsService.findAll();
   }
 
   @Get(':id')
-  findOne() {
-    return 'fetch song on the based on id';
+  findOne(
+    @Param(
+      'id',
+      new ParseIntPipe({ errorHttpStatusCode: HttpStatus.NOT_ACCEPTABLE }),
+    )
+    id: number,
+  ) {
+    return `fetch song on the based on id ${typeof id}`;
   }
 
   @Put(':id')

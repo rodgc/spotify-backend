@@ -40,8 +40,15 @@ export class SongsController {
   }
 
   @Put(':id')
-  update() {
-    return 'update song on the based on id';
+  async update(
+    @Param(
+      'id',
+      new ParseIntPipe({ errorHttpStatusCode: HttpStatus.NOT_ACCEPTABLE }),
+    )
+    id: number,
+    @Body() song: Partial<CreateSongDto>,
+  ) {
+    return await this.songsService.update(id, song);
   }
 
   @Delete(':id')

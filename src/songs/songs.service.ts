@@ -25,4 +25,8 @@ export class SongsService {
   async findAll(): Promise<Song[]> {
     return await this.songRepository.find();
   }
+
+  async findOne(id: number): Promise<Song> {
+    return await this.songRepository.findOneByOrFail({ id });
+  }
 }

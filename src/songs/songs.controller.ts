@@ -10,7 +10,7 @@ import {
   Put,
 } from '@nestjs/common';
 import { SongsService } from './songs.service';
-import { CreateSongDto } from './dto/create-song.dto';
+import { CreateSongDto } from './dtos/create-song.dto';
 
 @Controller('songs')
 export class SongsController {

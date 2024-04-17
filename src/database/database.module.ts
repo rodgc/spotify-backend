@@ -3,6 +3,8 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppConfigModule } from '../app-config/app-config.module';
 import { AppConfigService } from '../app-config/app-config.service';
 import { Song } from '../songs/entities/song.entity';
+import { Artist } from 'src/artists/entities/artist.entity';
+import { User } from 'src/users/entities/user.entity';
 
 @Module({
   imports: [
@@ -16,7 +18,7 @@ import { Song } from '../songs/entities/song.entity';
         username: config.getPostgresUser(),
         password: config.getPostgresPassword(),
         database: config.getPostgresDatabase(),
-        entities: [Song],
+        entities: [Song, Artist, User],
         logging: false,
         synchronize: true,
       }),

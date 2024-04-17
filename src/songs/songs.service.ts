@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { DeleteResult, Repository } from 'typeorm';
 import { Song } from './entities/song.entity';
 import { CreateSongDto } from './dtos/create-song.dto';
 
@@ -28,5 +28,9 @@ export class SongsService {
 
   async findOne(id: number): Promise<Song> {
     return await this.songRepository.findOneByOrFail({ id });
+  }
+
+  async remove(id: number): Promise<DeleteResult> {
+    return await this.songRepository.delete(id);
   }
 }

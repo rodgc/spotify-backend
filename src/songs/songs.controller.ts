@@ -12,6 +12,7 @@ import {
 import { SongsService } from './songs.service';
 import { CreateSongDto } from './dtos/create-song.dto';
 import { Song } from './entities/song.entity';
+import { DeleteResult } from 'typeorm';
 
 @Controller('songs')
 export class SongsController {
@@ -44,7 +45,13 @@ export class SongsController {
   }
 
   @Delete(':id')
-  delete() {
-    return 'delete song on the based on id';
+  async delete(
+    @Param(
+      'id',
+      new ParseIntPipe({ errorHttpStatusCode: HttpStatus.NOT_ACCEPTABLE }),
+    )
+    id: number,
+  ): Promise<DeleteResult> {
+    return await this.songsService.remove(id);
   }
 }

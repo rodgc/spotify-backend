@@ -11,19 +11,20 @@ import {
 } from '@nestjs/common';
 import { SongsService } from './songs.service';
 import { CreateSongDto } from './dtos/create-song.dto';
+import { Song } from './entities/song.entity';
 
 @Controller('songs')
 export class SongsController {
   constructor(private songsService: SongsService) {}
 
   @Post()
-  crate(@Body() createSong: CreateSongDto) {
-    return this.songsService.create(createSong);
+  async crate(@Body() createSong: CreateSongDto): Promise<Song> {
+    return await this.songsService.create(createSong);
   }
 
   @Get()
-  findAll() {
-    return this.songsService.findAll();
+  async findAll(): Promise<Song[]> {
+    return await this.songsService.findAll();
   }
 
   @Get(':id')

@@ -8,9 +8,16 @@ import { SongsController } from './songs/songs.controller';
 import { DatabaseModule } from './database/database.module';
 import { AuthModule } from './auth/auth.module';
 import { UsersModule } from './users/users.module';
+import { PlaylistsModule } from './playlists/playlists.module';
 
 @Module({
-  imports: [SongsModule, DatabaseModule, AuthModule, UsersModule],
+  imports: [
+    SongsModule,
+    DatabaseModule,
+    AuthModule,
+    UsersModule,
+    PlaylistsModule,
+  ],
   controllers: [AppController],
   providers: [AppService],
 })

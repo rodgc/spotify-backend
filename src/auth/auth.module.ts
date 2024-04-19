@@ -7,6 +7,7 @@ import { AppConfigModule } from 'src/app-config/app-config.module';
 import { AppConfigService } from 'src/app-config/app-config.service';
 import { JwtStrategy } from './jwt/jwt.strategy';
 import { ConfigService } from '@nestjs/config';
+import { ArtistsModule } from 'src/artists/artists.module';
 
 @Module({
   imports: [
@@ -21,6 +22,7 @@ import { ConfigService } from '@nestjs/config';
       }),
       inject: [AppConfigService],
     }),
+    ArtistsModule,
   ],
   providers: [AuthService, AppConfigService, ConfigService, JwtStrategy],
   controllers: [AuthController],

@@ -9,6 +9,7 @@ import { DatabaseModule } from './database/database.module';
 import { AuthModule } from './auth/auth.module';
 import { UsersModule } from './users/users.module';
 import { PlaylistsModule } from './playlists/playlists.module';
+import { ArtistsModule } from './artists/artists.module';
 
 @Module({
   imports: [
@@ -17,6 +18,7 @@ import { PlaylistsModule } from './playlists/playlists.module';
     AuthModule,
     UsersModule,
     PlaylistsModule,
+    ArtistsModule,
   ],
   controllers: [AppController],
   providers: [AppService],

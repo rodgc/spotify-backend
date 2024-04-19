@@ -10,19 +10,26 @@ import {
   Post,
   Put,
   Query,
+  Req,
+  UseGuards,
 } from '@nestjs/common';
 import { SongsService } from './songs.service';
 import { CreateSongDto } from './dtos/create-song.dto';
 import { Song } from './entities/song.entity';
 import { DeleteResult } from 'typeorm';
 import { Pagination } from 'nestjs-typeorm-paginate';
+import { JwtArtistGuard } from 'src/auth/jwt/jwt-artists.guard';
 
 @Controller('songs')
 export class SongsController {
   constructor(private songsService: SongsService) {}
 
   @Post()
-  async crate(@Body() createSong: CreateSongDto): Promise<Song> {
+  @UseGuards(JwtArtistGuard)
+  async crate(
+    @Body() createSong: CreateSongDto,
+    @Req() request,
+  ): Promise<Song> {
     return await this.songsService.create(createSong);
   }
 

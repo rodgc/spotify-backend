@@ -7,6 +7,8 @@ export type AppConfigSchema = {
   POSTGRES_USER: string;
   POSTGRES_PASSWORD: string;
   POSTGRES_DATABASE: string;
+  JWT_SECRET: string;
+  JWT_EXPIRATION: number;
 };
 
 const joiSchema: Record<keyof AppConfigSchema, Joi.Schema> = {
@@ -16,6 +18,8 @@ const joiSchema: Record<keyof AppConfigSchema, Joi.Schema> = {
   POSTGRES_USER: Joi.string().required(),
   POSTGRES_PASSWORD: Joi.string().required(),
   POSTGRES_DATABASE: Joi.string().required(),
+  JWT_SECRET: Joi.string().required(),
+  JWT_EXPIRATION: Joi.number().required(),
 };
 
 export const appConfigSchema = Joi.object(joiSchema);

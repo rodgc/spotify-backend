@@ -17,6 +17,11 @@ export class AppConfigService {
   public getPostgresDatabase = (): string =>
     this.getConfigValue('POSTGRES_DATABASE');
 
+  // JWT
+  public getJwtSecret = (): string => this.getConfigValue('JWT_SECRET');
+  public getJwtExpiration = (): number =>
+    parseInt(this.getConfigValue('JWT_EXPIRATION'));
+
   /**
    * Following method is fix for `@nestjs/config` types that return also undefined despite value is not optional in the schema.
    * Presence of each value in the config is ensured with Joi validation schema.

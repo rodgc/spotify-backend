@@ -4,6 +4,7 @@ import { Repository } from 'typeorm';
 import { User } from './entities/user.entity';
 import { CreateUserDto } from './dtos/create-user.dto';
 import * as bcrypt from 'bcryptjs';
+import { LoginDto } from '../auth/dtos/login.dto';
 
 @Injectable()
 export class UsersService {
@@ -17,5 +18,9 @@ export class UsersService {
     const user = await this.userRepository.save(userDto);
     delete user.password;
     return user;
+  }
+
+  async findOne(user: LoginDto): Promise<User> {
+    return this.userRepository.findOneByOrFail({ email: user.email });
   }
 }

@@ -8,6 +8,7 @@ import { AppConfigService } from 'src/app-config/app-config.service';
 import { JwtStrategy } from './jwt/jwt.strategy';
 import { ConfigService } from '@nestjs/config';
 import { ArtistsModule } from 'src/artists/artists.module';
+import { ApiKeyStrategy } from './strategies/api-key.strategy';
 
 @Module({
   imports: [
@@ -24,7 +25,13 @@ import { ArtistsModule } from 'src/artists/artists.module';
     }),
     ArtistsModule,
   ],
-  providers: [AuthService, AppConfigService, ConfigService, JwtStrategy],
+  providers: [
+    AuthService,
+    AppConfigService,
+    ConfigService,
+    JwtStrategy,
+    ApiKeyStrategy,
+  ],
   controllers: [AuthController],
   exports: [AuthService],
 })

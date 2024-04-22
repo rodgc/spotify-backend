@@ -27,6 +27,9 @@ export class User {
   @Column({ default: false, type: 'boolean' })
   enable2FA: boolean;
 
+  @Column({ default: null })
+  apiKey: string;
+
   @OneToMany(() => Playlist, (playlist) => playlist.user)
   playlists: Playlist[];
 }

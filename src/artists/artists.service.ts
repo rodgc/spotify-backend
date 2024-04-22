@@ -11,6 +11,6 @@ export class ArtistsService {
   ) {}
 
   async findArtists(userId: number): Promise<Artist> {
-    return this.artistsRepository.findOneByOrFail({ user: { id: userId } });
+    return this.artistsRepository.findOneBy({ user: { id: userId } });
   }
 }

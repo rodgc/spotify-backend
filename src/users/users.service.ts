@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { Repository, UpdateResult } from 'typeorm';
 import { User } from './entities/user.entity';
 import { CreateUserDto } from './dtos/create-user.dto';
 import * as bcrypt from 'bcryptjs';
@@ -21,6 +21,27 @@ export class UsersService {
   }
 
   async findOne(user: LoginDto): Promise<User> {
-    return this.userRepository.findOneByOrFail({ email: user.email });
+    return await this.userRepository.findOneByOrFail({ email: user.email });
+  }
+
+  async findById(id: number): Promise<User> {
+    return await this.userRepository.findOneByOrFail({ id });
+  }
+
+  async updateSecretKey(
+    id: number,
+    twoFASecret: string,
+  ): Promise<UpdateResult> {
+    return await this.userRepository.update(
+      { id },
+      { twoFASecret, enable2FA: true },
+    );
+  }
+
+  async disable2FA(id: number): Promise<UpdateResult> {
+    return await this.userRepository.update(
+      { id },
+      { enable2FA: false, twoFASecret: null },
+    );
   }
 }

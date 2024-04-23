@@ -10,6 +10,7 @@ import { AuthModule } from './auth/auth.module';
 import { UsersModule } from './users/users.module';
 import { PlaylistsModule } from './playlists/playlists.module';
 import { ArtistsModule } from './artists/artists.module';
+import { SeedModule } from './seed/seed.module';
 
 @Module({
   imports: [
